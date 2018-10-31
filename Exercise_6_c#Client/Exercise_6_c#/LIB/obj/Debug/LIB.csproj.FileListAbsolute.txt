@@ -1,5 +1,0 @@
-/root/Desktop/IKN/Exercise6/Exercise_6_c#/Exercise_6_c#/LIB/bin/Debug/LIB.dll
-/root/Desktop/IKN/Exercise6/Exercise_6_c#/Exercise_6_c#/LIB/bin/Debug/LIB.pdb
-/root/Desktop/IKN/Exercise6/Exercise_6_c#/Exercise_6_c#/LIB/obj/Debug/LIB.csproj.CoreCompileInputs.cache
-/root/Desktop/IKN/Exercise6/Exercise_6_c#/Exercise_6_c#/LIB/obj/Debug/LIB.dll
-/root/Desktop/IKN/Exercise6/Exercise_6_c#/Exercise_6_c#/LIB/obj/Debug/LIB.pdb

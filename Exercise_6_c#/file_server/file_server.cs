@@ -45,10 +45,10 @@ namespace tcp
 					Console.WriteLine($" >> Filename from client: {fileName}");
 					Console.WriteLine(" >> Filesize requested from client!");
 					long fileSize = LIB.check_File_Exists(fileName);
-					Console.WriteLine($" >> Filesize from client: {fileSize}");
+					Console.WriteLine($" >> Filesize from server: {fileSize}");
+					LIB.writeTextTCP(networkStream, fileSize.ToString());
                     if(fileSize != 0)
 					{
-						LIB.writeTextTCP(networkStream, fileSize.ToString());
 						Console.WriteLine(" >> Sending file...");
 						sendFile(fileName, fileSize, networkStream);
 						Console.WriteLine(" >> File sent!");
@@ -88,19 +88,23 @@ namespace tcp
 			fileStream.Read(sendBytes, 0, sendBytes.Length);
 			long bytesLeft = fileSize;
 			long bytesSent = 0;
-			if (bytesLeft > 1000)
-			{
 				for (int i = 0; i < fileSize; i += 1000)
 				{
-					io.Write(sendBytes, i, 1000);
-					bytesLeft -= 1000;
-					bytesSent += 1000;
-				}
-			}
-			else if(bytesLeft < 1000 && bytesLeft > 0)
-			{
-				io.Write(sendBytes, (int)bytesSent, (int)bytesLeft);
-			}
+					if (bytesLeft > 1000)
+					{
+						io.Write(sendBytes, i, 1000);   
+						bytesLeft -= 1000;
+						bytesSent += 1000;
+					}
+					else if (bytesLeft < 1000 && bytesLeft > 0)
+                    {
+                        io.Write(sendBytes, (int)bytesSent, (int)bytesLeft);
+					    bytesSent += bytesLeft;
+					    bytesLeft = 0;
+                    }
+				Console.WriteLine(" >> Sent bytes: " + bytesSent.ToString());
+                Console.WriteLine(" >> Bytes left: " + bytesLeft.ToString());
+			    }
 			fileStream.Close();
 		}
 
